@@ -5,12 +5,23 @@ A brainfuck interpreter written in D while using -betterC flag
 - dub
 
 ## Usage
-In project root
+Run with dub from project root
 - `dub run -- FILENAME`
 
-Or
+Or build with `dub build` and execute as normal cli app
 - `dub build`
 - `./bin/brainfukd FILENAME`
 
-## Known issues
-Some programs that are continuously reading user input might get stuck on infinite loop since brainfukd reads user input as it goes, meaning when it encounters `,` it prompts for input where you can put as many characters as you want.
+## Arguments
+Arguments are hard-coded to be in order of:
+1. Filename
+2. Optional input
+
+Optional input can be used with programs like `test/xmastree.bf` where, if you will run it normally, it would infinitely ask for input because it expects null (zero) termination (i.e `\0` in c).
+
+## Examples
+These examples will be using programs in `test` directory.
+- `./bin/brainfukd test/helloworld.bf` - Prints hello world
+- `./bin/brainfukd test/xmastree.bf 12` - Prints xmas tree with size (height) 13 (12 + 1)
+- `./bin/brainfukd test/sierpinski.bf` - Prints sierpinski triangle
+- `./bin/brainfukd test/rot13.bf` - Takes input, encodes it with rot13 and prints out result

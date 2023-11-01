@@ -8,6 +8,7 @@
 import core.stdc.stdio: printf, getc, perror, stdin;
 import core.stdc.stdio: FILE, fopen, fread, fseek, ftell, rewind, fclose, SEEK_END;
 import core.stdc.stdlib: exit, free, malloc, calloc;
+import core.stdc.string: strlen;
 
 // https://pubs.opengroup.org/onlinepubs/009695399/basedefs/errno.h.html
 import core.stdc.errno: ENOENT, EINVAL, ENOMEM, EIO, EISDIR, ENODATA;
@@ -16,15 +17,30 @@ const int TAPE_SIZE = 32768; // 2^15
 
 extern(C) int main(int argc, char** argv) {
     // printf("Edit source/app.d to start your project.");
-    if (argc != 2) {
+    if (argc < 2) {
         perror("Please supply a single filepath");
         exit(EINVAL);
+    }
+
+    if (argv[1] == "--help" || argv[1] == "-h") {
+        printf("Usage: brainfukd FILEPATH [INPUT?]\n\n" ~
+               "Example:\nbrainfukd test.bf - executes test.bf" ~
+               "\nbrainfukd xmas.bf 12 - execites xmas.bf and sets 12 as input");
     }
 
     FILE* fp;
     long lSize;
     char* buffer;
     char* filename = argv[1];
+
+    char* bfArgs;
+    ulong bfArgsIndex = 0;
+    ulong bfArgsLen = 0;
+
+    if (argc == 3) {
+        bfArgs = argv[2];
+        bfArgsLen = strlen(bfArgs);
+    }
 
     fp = fopen(filename, "r");
     if (fp == null) {
@@ -100,8 +116,17 @@ extern(C) int main(int argc, char** argv) {
                 printf("%c", tape[index]);
             break;
             case ',':
-                char c = cast(char) getc(stdin);
-                tape[index] = c;
+                if (bfArgsLen && bfArgsIndex <= bfArgsLen) {
+                    if (bfArgsIndex == bfArgsLen) {
+                        tape[index] = '\0';
+                    } else {
+                        tape[index] = bfArgs[bfArgsIndex];
+                    }
+                    bfArgsIndex++;
+                } else {
+                    char c = cast(char) getc(stdin);
+                    tape[index] = c;
+                }
             break;
             case '[': // ]
                 int bopen = 1;

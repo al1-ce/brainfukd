@@ -1,12 +1,33 @@
-[sierpinski.b -- display Sierpinski triangle
-(c) 2016 Daniel B. Cristofani
-http://brainfuck.org/]
-
-++++++++[>+>++++<<-]>++>>+<[-[>>+<<-]+>>]>+[
-    -<<<[
-        ->[+[-]+>++>>>-<<]<[<]>>++++++[<<+++++>>-]+<<++.[-]<<
-    ]>.>+[>>]>+
-]
-
-[Shows an ASCII representation of the Sierpinski triangle
-(iteration 5).]
+[ This program prints Sierpinski triangle on 80-column display. ]
+                                >
+                               + +
+                              +   +
+                             [ < + +
+                            +       +
+                           + +     + +
+                          >   -   ]   >
+                         + + + + + + + +
+                        [               >
+                       + +             + +
+                      <   -           ]   >
+                     > + + >         > > + >
+                    >       >       +       <
+                   < <     < <     < <     < <
+                  <   [   -   [   -   >   +   <
+                 ] > [ - < + > > > . < < ] > > >
+                [                               [
+               - >                             + +
+              +   +                           +   +
+             + + [ >                         + + + +
+            <       -                       ]       >
+           . <     < [                     - >     + <
+          ]   +   >   [                   -   >   +   +
+         + + + + + + + +                 < < + > ] > . [
+        -               ]               >               ]
+       ] +             < <             < [             - [
+      -   >           +   <           ]   +           >   [
+     - < + >         > > - [         - > + <         ] + + >
+    [       -       <       -       >       ]       <       <
+   < ]     < <     < <     ] +     + +     + +     + +     + +
+  +   .   +   +   +   .   [   -   ]   <   ]   +   +   +   +   +
+ * * * * * M a d e * B y : * N Y Y R I K K I * 2 0 0 2 * * * * *
