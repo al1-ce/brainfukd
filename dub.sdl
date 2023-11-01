@@ -1,0 +1,13 @@
+name "brainfukd"
+description "Brainfuck interpreter"
+authors "Alisa Lain"
+copyright "Copyright © 2023, Alisa Lain"
+license "GPL-3.0"
+
+dflags "-betterC"
+
+sourcePaths "src/"
+importPaths "src/"
+
+targetType "executable"
+targetPath "bin/"
